@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+/* base CSS  */
+html {
+  height: 100%;
+  line-height: 1.2;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial;
+  font-weight: 400;
+}
