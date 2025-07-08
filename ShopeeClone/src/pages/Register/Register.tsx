@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { data, Link } from "react-router-dom";
 import { rules } from "../../Util/rules";
+import Input from "../../components/Input";
 
 interface FormData {
   email: string;
@@ -38,49 +39,35 @@ const Register = () => {
               noValidate
             >
               <div className="text-2xl">Đăng ký</div>
-              <div className="mt-8">
-                <input
-                  type="email"
-                  className="p-3 w-full outline-none border border-gray-400 focus:border-gray-600 rounded-sm
-                  focus:shadow-sm"
-                  placeholder="Email"
-                  {...register("email", rules.email)}
-                />
-                <div className="mt-1 text-red-500 min-h-[1.25rem] text-sm">
-                  {errors.email?.message}
-                </div>
-              </div>
-              <div className="mt-3">
-                <input
-                  type="password"
-                  className="p-3 w-full outline-none border border-gray-400 focus:border-gray-600 rounded-sm
-                  focus:shadow-sm"
-                  placeholder="Password"
-                  autoComplete="on"
-                  {...register("password", rules.password)}
-                />
-                <div className="mt-1 text-red-500 min-h-[1.25rem] text-sm">
-                  {errors.password?.message}
-                </div>
-              </div>
-              <div className="mt-3">
-                <input
-                  type="password"
-                  className="p-3 w-full outline-none border border-gray-400 focus:border-gray-600 rounded-sm
-                  focus:shadow-sm"
-                  placeholder="Confirm password"
-                  autoComplete="on"
-                  {...register("confirm_password", {
-                    ...rules.confirm_password,
-                    validate: (value) =>
-                      value === getValues("password") ||
-                      "Không khớp với password",
-                  })}
-                />
-                <div className="mt-1 text-red-500 min-h-[1.25rem] text-sm">
-                  {errors.confirm_password?.message}
-                </div>
-              </div>
+              <Input
+                name="email"
+                register={register}
+                type="email"
+                className="mt-8"
+                errorMessagse={errors.email?.message}
+                placeholder="email"
+                rules={rules.email}
+              />
+              <Input
+                name="password"
+                register={register}
+                type="password"
+                className="mt-3"
+                errorMessagse={errors.password?.message}
+                placeholder="Password"
+                autoComplete="on"
+                rules={rules.password}
+              />
+              <Input
+                name="confirm_password"
+                register={register}
+                type="password"
+                className="mt-3"
+                errorMessagse={errors.confirm_password?.message}
+                placeholder="Confirm password"
+                autoComplete="on"
+                rules={rules.confirm_password}
+              />
               <button
                 type="submit"
                 className="w-full text-center py-4 px-2 uppercase bg-red-500 text-white text-sm hover:bg-red-500"
