@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { data, Link } from "react-router-dom";
 import { rules } from "../../Util/rules";
 
 interface FormData {
@@ -11,12 +11,20 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<FormData>();
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
-  });
+  const onSubmit = handleSubmit(
+    (data) => {
+      console.log(data);
+    },
+    (data) => {
+      const password = getValues("password");
+      console.log(password);
+    }
+  );
   console.log(errors);
+
   return (
     <div className="bg-orange-600">
       {/* container */}
@@ -48,6 +56,7 @@ const Register = () => {
                   className="p-3 w-full outline-none border border-gray-400 focus:border-gray-600 rounded-sm
                   focus:shadow-sm"
                   placeholder="Password"
+                  autoComplete="on"
                   {...register("password", rules.password)}
                 />
                 <div className="mt-1 text-red-500 min-h-[1.25rem] text-sm">
@@ -56,11 +65,17 @@ const Register = () => {
               </div>
               <div className="mt-3">
                 <input
-                  type="confirm_password"
+                  type="password"
                   className="p-3 w-full outline-none border border-gray-400 focus:border-gray-600 rounded-sm
                   focus:shadow-sm"
                   placeholder="Confirm password"
-                  {...register("confirm_password", rules.confirm_password)}
+                  autoComplete="on"
+                  {...register("confirm_password", {
+                    ...rules.confirm_password,
+                    validate: (value) =>
+                      value === getValues("password") ||
+                      "Không khớp với password",
+                  })}
                 />
                 <div className="mt-1 text-red-500 min-h-[1.25rem] text-sm">
                   {errors.confirm_password?.message}

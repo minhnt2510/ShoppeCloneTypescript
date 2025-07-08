@@ -10,7 +10,7 @@ const Login = () => {
   const onSubmit = handleSubmit((data) => {
     console.log(data);
   });
-  
+
   return (
     <div className="bg-orange-600">
       {/* container */}
@@ -42,6 +42,7 @@ const Login = () => {
                   className="p-3 w-full outline-none border border-gray-400 focus:border-gray-600 rounded-sm
                   focus:shadow-sm"
                   placeholder="Password"
+                  autoComplete="on"
                 />
                 <div className="mt-1 text-red-500 min-h-[1rem] text-sm"></div>
               </div>
