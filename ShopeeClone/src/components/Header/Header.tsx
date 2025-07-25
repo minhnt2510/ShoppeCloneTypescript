@@ -1,65 +1,76 @@
 import { Link } from "react-router-dom";
 import iconShopee from "../../assets/iconShopee.png";
+import Popover from "../Popover/Popover"; // Thêm dòng này
 
 const Header = () => {
   return (
-    <div className="pb-5 pt-2 bg-[linear-gradient(-180deg,#f53d2d,#f63)] text-white">
-      <div className="container">
-        <div className="flex justify-end">
-          <div className="flex items-center py-1 hover:text-gray-300 cursor-pointer">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03
-                4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 
-                3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686
-                0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162
-                0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"
-              />
-            </svg>
-            <span className="mx-1">Tiếng việt</span>
-
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"
-              />
-            </svg>
-          </div>
-          <div className="flex items-center py-1 hover:text-gray-300 cursor-pointer pl-4">
-            <div>
+    <div className="pb-5 pt-2 bg-gradient-to-b from-[#f53d2d] to-[#f63] text-white">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-end items-center space-x-6">
+          <Popover
+            renderPopover={
+              <div className="bg-white shadow-md rounded-sm border border-gray-200">
+                <div className="flex flex-col py-2 px-3">
+                  <button className="py-2 px-3 text-gray-700 hover:text-orange-500">
+                    Tiếng Việt
+                  </button>
+                  <button className="py-2 px-3 text-gray-700 hover:text-orange-500 mt-2">
+                    English
+                  </button>
+                </div>
+              </div>
+            }
+            className="flex items-center space-x-2 py-1 hover:text-gray-300 cursor-pointer"
+            placement="bottom-end"
+          >
+            <span className="flex items-center space-x-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-6"
+                className="w-6 h-6"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963
-                 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"
                 />
               </svg>
-            </div>
+              <span>Tiếng Việt</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"
+                />
+              </svg>
+            </span>
+          </Popover>
+
+          <div className="flex items-center space-x-2 py-1 hover:text-gray-300 cursor-pointer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              />
+            </svg>
             <span>minhnt</span>
           </div>
         </div>
@@ -67,22 +78,30 @@ const Header = () => {
         <div className="grid grid-cols-12 gap-4 mt-5 items-center">
           <div className="col-span-3">
             <Link to="/" className="flex items-center cursor-pointer">
-              <img src={iconShopee} className="h-14" alt="Shopee logo" />
+              <img
+                src={iconShopee}
+                className="h-14"
+                alt="Shopee logo"
+                onError={(e) => {
+                  const img = e.currentTarget as HTMLImageElement;
+                  img.src = "https://via.placeholder.com/56";
+                }}
+              />
               <span className="ml-2 text-white text-3xl">Shopee</span>
             </Link>
           </div>
 
-          <form className="col-span-8">
+          <div className="col-span-8">
             <div className="bg-white rounded-sm p-1 flex">
               <input
                 type="text"
                 name="search"
-                className="text-black px-3 py-2 flex-grow border-none outline-none"
+                className="text-black px-3 py-2 flex-grow border-none outline-none bg-transparent"
                 placeholder="Tìm kiếm sản phẩm, thương hiệu và tên shop"
               />
               <button
-                type="submit"
-                className="bg-orange-500 text-white px-6 py-2 hover:bg-orange-600"
+                className="bg-orange-500 text-white px-6 py-2 rounded-sm hover:bg-orange-600"
+                onClick={() => alert("Tìm kiếm được kích hoạt!")}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +119,7 @@ const Header = () => {
                 </svg>
               </button>
             </div>
-          </form>
+          </div>
 
           <div className="col-span-1 flex justify-center">
             <Link to="/cart" className="hover:text-gray-300">
@@ -110,7 +129,7 @@ const Header = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-8"
+                className="w-8 h-8"
               >
                 <path
                   strokeLinecap="round"
