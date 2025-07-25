@@ -122,22 +122,66 @@ const Header = () => {
           </div>
 
           <div className="col-span-1 flex justify-center">
-            <Link to="/cart" className="hover:text-gray-300">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-8 h-8"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-                />
-              </svg>
-            </Link>
+            <Popover
+              renderPopover={
+                <div className="bg-white relative shadow-md rounded-sm border border-gray-200 max-w-[400px] text-sm">
+                  <div className="p-2">
+                    <div className="text-gray-400 capitalize">
+                      Sản phẩm mới thêm
+                    </div>
+                    <div className="mt-5">
+                      {[1, 2, 3, 4, 5].map((_, idx) => (
+                        <div className="mt-4 flex" key={idx}>
+                          <div className="flex-shrink-0">
+                            <img
+                              src="https://cf.shopee.vn/file/sg-11134201-22110-s3ycuwtvgvjvb4_tn"
+                              alt="anh"
+                              className="w-11 h-11 object-cover"
+                            />
+                          </div>
+                          <div className="flex-grow ml-2 overflow-hidden">
+                            <div className="truncate">
+                              [LIFEMCMBP2 -12% đơn 250K] Bộ Nồi Inox 3 Đáy
+                              SUNHOUSE SH334 16, 20, 24 cm
+                            </div>
+                          </div>
+                          <div className="ml-2 flex-shrink-0">
+                            <span className="text-orange-500">₫469.000</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex mt-6 items-center justify-between">
+                      <div className="capitalize text-xs text-gray-500">
+                        Thêm hàng vào giỏ
+                      </div>
+                      <button className="capitalize bg-orange-600 hover:bg-opacity-90 px-4 py-2 rounded-sm text-white">
+                        Xem giỏ hàng
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              }
+            >
+              <Link to="/cart">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-8 h-8"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3
+                     2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0
+                      .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                  />
+                </svg>
+              </Link>
+            </Popover>
           </div>
         </div>
       </div>
