@@ -1,15 +1,53 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { schema, schemalogin, type SchemaLogin } from "../../Utils/rules";
+import type { Schema } from "yup";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "../../apis/auth.api";
+import type { ResponseApi } from "../../components/types/utils.type";
+import { isAxiosUnprocessableEntityError } from "../../Utils/utils";
+import Input from "../../components/Input";
 
+type FormData = SchemaLogin;
 const Login = () => {
   const {
     register,
     handleSubmit,
+    setError,
+    watch,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormData>({
+    resolver: yupResolver(schemalogin),
+  });
+
+  const loginMutation = useMutation({
+    mutationFn: (body: Omit<FormData, "confirm_password">) => login(body),
+  });
   const onSubmit = handleSubmit((data) => {
     console.log(data);
+    loginMutation.mutate(data, {
+      onSuccess: (data) => {
+        console.log(data);
+      },
+      onError: (error) => {
+        if (isAxiosUnprocessableEntityError<ResponseApi<FormData>>(error)) {
+          const formError = error.response?.data.data;
+          console.log(error.response?.data);
+          if (formError) {
+            Object.keys(formError).forEach((key) => {
+              setError(key as keyof FormData, {
+                message: formError[key as keyof FormData],
+                type: "Server",
+              });
+            });
+          }
+        }
+      },
+    });
   });
+  const value = watch();
+  console.log(value);
 
   return (
     <div className="bg-orange-600">
@@ -21,31 +59,26 @@ const Login = () => {
             <form
               className="p-10 rounded bg-white shadow-sm"
               onSubmit={onSubmit}
+              noValidate
             >
               <div className="text-2xl">Đăng nhập</div>
-              <div className="mt-8">
-                <input
-                  type="email"
-                  name="email"
-                  className="p-3 w-full outline-none border border-gray-400 focus:border-gray-600 rounded-sm
-                  focus:shadow-sm"
-                  placeholder="Email"
-                />
-                <div className="mt-1 text-red-500 min-h-[1rem] text-sm">
-                  Email không hợp lệ
-                </div>
-              </div>
-              <div className="mt-3">
-                <input
-                  type="password"
-                  name="password"
-                  className="p-3 w-full outline-none border border-gray-400 focus:border-gray-600 rounded-sm
-                  focus:shadow-sm"
-                  placeholder="Password"
-                  autoComplete="on"
-                />
-                <div className="mt-1 text-red-500 min-h-[1rem] text-sm"></div>
-              </div>
+              <Input
+                name="email"
+                register={register}
+                type="email"
+                className="mt-8"
+                errorMessagse={errors.email?.message}
+                placeholder="email"
+              />
+              <Input
+                name="password"
+                register={register}
+                type="password"
+                className="mt-3"
+                errorMessagse={errors.password?.message}
+                placeholder="Password"
+                autoComplete="on"
+              />
               <button
                 type="submit"
                 className="w-full text-center py-4 px-2 uppercase bg-red-500 text-white text-sm hover:bg-red-500"
